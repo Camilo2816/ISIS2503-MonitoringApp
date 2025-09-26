@@ -4,14 +4,13 @@
 <div class="content">
     <div class="">
         <div class="page-header-title">
-            <h4 class="page-title">Last Ten Measures</h4>
-            <!--- 
+            <h4 class="page-title">📦 Últimas Transacciones de Inventario</h4>
             <div style="text-align:right;">
                 <button type="button" class="btn btn-success waves-effect waves-light"
-                        onClick=" window.location.href='/measurementcreate' " style="text-align:center;">+
+                        onClick=" window.location.href='/measurementcreate' " style="text-align:center;">
+                    ➕ Nueva Transacción
                 </button>
             </div>
-            --->
         </div>
     </div>
 
@@ -26,32 +25,59 @@
                     <table class="table table-hover">
                         <thead>
                         <tr style="color:#0E2EB0">
-                            <th font color="red">Variable</th>
-                            <th>Value</th>
-                            <th>Unit</th>
-                            <th>Place</th>
-                            <th>Date Time</th>
+                            <th>🏷️ Producto</th>
+                            <th>📊 Tipo</th>
+                            <th>📦 Cantidad</th>
+                            <th>📍 Ubicación</th>
+                            <th>👤 Usuario</th>
+                            <th>📅 Fecha</th>
                         </tr>
                         </thead>
                         <tbody>
 
-                        {% for measurement in measurement_list %}
+                        {% for transaction in transaction_list %}
                         <tr>
-                            <td>{{ measurement.variable.name }}</td>
-                            <td>{{ measurement.value }}</td>
-                            <td>{{ measurement.unit }}</td>
-                            <td>{{ measurement.place }}</td>
-                            <td>{{ measurement.dateTime }}</td>
+                            <td>
+                                <strong>{{ transaction.product.name }}</strong><br>
+                                <small style="color: #666;">SKU: {{ transaction.product.sku }}</small>
+                            </td>
+                            <td>
+                                {% if transaction.transaction_type == 'IN' %}
+                                    <span class="label label-success">📥 Entrada</span>
+                                {% elif transaction.transaction_type == 'OUT' %}
+                                    <span class="label label-danger">📤 Salida</span>
+                                {% elif transaction.transaction_type == 'ADJ' %}
+                                    <span class="label label-warning">⚖️ Ajuste</span>
+                                {% elif transaction.transaction_type == 'TRF' %}
+                                    <span class="label label-info">🔄 Transferencia</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <strong>{{ transaction.quantity }}</strong> {{ transaction.product.unit }}
+                            </td>
+                            <td>{{ transaction.location }}</td>
+                            <td>{{ transaction.user }}</td>
+                            <td>{{ transaction.created_at|date:"d/m/Y H:i" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" style="text-align: center; color: #666; padding: 20px;">
+                                📭 No hay transacciones registradas
+                            </td>
                         </tr>
                         {% endfor %}
 
                         </tbody>
                     </table>
 
-                    <div style="text-align:center;">
+                    <div style="text-align:center; margin-top: 20px;">
                         <button type="button" class="btn btn-primary waves-effect waves-light"
-                                onClick=" window.location.href='/' ">
-                            Back
+                                onClick=" window.location.href='/' " style="margin-right: 10px;">
+                            🏠 Inicio
+                        </button>
+                        <button type="button" class="btn btn-info waves-effect waves-light"
+                                onClick=" window.location.href='/admin/' ">
+                            ⚙️ Administración
                         </button>
                     </div>
 

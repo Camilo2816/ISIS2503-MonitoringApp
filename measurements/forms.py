@@ -1,21 +1,33 @@
 from django import forms
-from .models import Measurement
+from .models import InventoryTransaction
+from variables.models import Product
 
-class MeasurementForm(forms.ModelForm):
+class InventoryTransactionForm(forms.ModelForm):
     class Meta:
-        model = Measurement
+        model = InventoryTransaction
         fields = [
-            'variable',
-            'value',
-            'unit',
-            'place',
-            #'dateTime',
+            'product',
+            'transaction_type',
+            'quantity',
+            'location',
+            'reference',
+            'notes',
+            'unit_price',
         ]
 
         labels = {
-            'variable' : 'Variable',
-            'value' : 'Value',
-            'unit' : 'Unit',
-            'place' : 'Place',
-            #'dateTime' : 'Date Time',
+            'product': 'Producto',
+            'transaction_type': 'Tipo de Transacción',
+            'quantity': 'Cantidad',
+            'location': 'Ubicación',
+            'reference': 'Referencia',
+            'notes': 'Notas',
+            'unit_price': 'Precio Unitario',
         }
+        widgets = {
+            'transaction_type': forms.Select(choices=InventoryTransaction.TRANSACTION_TYPES),
+            'notes': forms.Textarea(attrs={'rows': 3}),
+        }
+
+# Mantener compatibilidad con el nombre anterior
+MeasurementForm = InventoryTransactionForm

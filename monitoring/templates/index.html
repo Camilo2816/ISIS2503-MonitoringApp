@@ -1,8 +1,32 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <div style=" display: flex; align-items: center; justify-content: center;" class="login-box auth0-box before">
-            <img style="width:80%; " src="/static/media/monitor.png" />
+    <div style=" display: flex; align-items: center; justify-content: center; flex-direction: column;" class="login-box auth0-box before">
+            <img style="width:80%; margin-bottom: 20px;" src="/static/media/monitor.png" />
+            <h1 style="color: #0E2EB0; text-align: center;">🏭 Sistema de Inventario de Bodega</h1>
+            <p style="text-align: center; color: #666; font-size: 18px;">Gestión inteligente de productos y transacciones</p>
+            
+            <div style="margin-top: 30px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+                <a href="/measurements/" class="btn btn-primary" style="padding: 10px 20px; text-decoration: none;">
+                    📦 Ver Transacciones
+                </a>
+                <a href="/measurementcreate/" class="btn btn-success" style="padding: 10px 20px; text-decoration: none;">
+                    ➕ Nueva Transacción
+                </a>
+                <a href="/admin/" class="btn btn-info" style="padding: 10px 20px; text-decoration: none;">
+                    ⚙️ Administración
+                </a>
+            </div>
+            
+            <div style="margin-top: 30px; text-align: center;">
+                <h3 style="color: #0E2EB0;">🔗 API Endpoints</h3>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                    <code>GET /health-check/</code> - Health Check para ALB<br>
+                    <code>GET /products</code> - Lista de productos<br>
+                    <code>GET /inventory/transactions</code> - Transacciones de inventario<br>
+                    <code>POST /inventory/transactions/create</code> - Crear transacción
+                </div>
+            </div>
     </div>
 
 {% endblock %}

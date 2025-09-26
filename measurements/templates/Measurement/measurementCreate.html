@@ -1,12 +1,128 @@
-{% extends 'base.html' %} 
-{% block content %} 
-<form method="POST"> 
-    {% csrf_token %}
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="content">
+    <div class="">
+        <div class="page-header-title">
+            <h4 class="page-title">➕ Nueva Transacción de Inventario</h4>
+        </div>
+    </div>
+
     <br>
-    {{ form.as_p }} 
-    <button type="submit" class="btn btn-success waves-effect waves-light">Create</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light"
-                                onClick=" window.location.href='/measurements' ">Back
-    </button>
-</form> 
+
+    <div class="page-content-wrapper">
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{ form.product.id_for_label }}" style="color: #0E2EB0; font-weight: bold;">
+                                        🏷️ Producto
+                                    </label>
+                                    {{ form.product }}
+                                    {% if form.product.errors %}
+                                        <div class="text-danger">{{ form.product.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{ form.transaction_type.id_for_label }}" style="color: #0E2EB0; font-weight: bold;">
+                                        📊 Tipo de Transacción
+                                    </label>
+                                    {{ form.transaction_type }}
+                                    {% if form.transaction_type.errors %}
+                                        <div class="text-danger">{{ form.transaction_type.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{ form.quantity.id_for_label }}" style="color: #0E2EB0; font-weight: bold;">
+                                        📦 Cantidad
+                                    </label>
+                                    {{ form.quantity }}
+                                    {% if form.quantity.errors %}
+                                        <div class="text-danger">{{ form.quantity.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{ form.location.id_for_label }}" style="color: #0E2EB0; font-weight: bold;">
+                                        📍 Ubicación
+                                    </label>
+                                    {{ form.location }}
+                                    {% if form.location.errors %}
+                                        <div class="text-danger">{{ form.location.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{ form.reference.id_for_label }}" style="color: #0E2EB0; font-weight: bold;">
+                                        📋 Referencia
+                                    </label>
+                                    {{ form.reference }}
+                                    {% if form.reference.errors %}
+                                        <div class="text-danger">{{ form.reference.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{ form.unit_price.id_for_label }}" style="color: #0E2EB0; font-weight: bold;">
+                                        💰 Precio Unitario
+                                    </label>
+                                    {{ form.unit_price }}
+                                    {% if form.unit_price.errors %}
+                                        <div class="text-danger">{{ form.unit_price.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.notes.id_for_label }}" style="color: #0E2EB0; font-weight: bold;">
+                                📝 Notas
+                            </label>
+                            {{ form.notes }}
+                            {% if form.notes.errors %}
+                                <div class="text-danger">{{ form.notes.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button type="submit" class="btn btn-success waves-effect waves-light" style="margin-right: 10px;">
+                                ✅ Crear Transacción
+                            </button>
+                            <button type="button" class="btn btn-primary waves-effect waves-light"
+                                    onClick=" window.location.href='/measurements' " style="margin-right: 10px;">
+                                📦 Ver Transacciones
+                            </button>
+                            <button type="button" class="btn btn-secondary waves-effect waves-light"
+                                    onClick=" window.location.href='/' ">
+                                🏠 Inicio
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
